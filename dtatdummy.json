@@ -1,0 +1,141 @@
+[{
+  "INS": "TPG-HRC-004",
+  "PO": "2510271619",
+  "CP": "24006392",
+  "QTY": 2600,
+  "PROCESS": "BOTAN+HCQT+SB",
+  "CUSLOT": "220518-4",
+  "TPKLOT": "G22602GC03",
+  "FG": "21005879",
+  "CUSTOMER": "TBL",
+  "PART": "31971 3VX0B",
+  "PARTNAME": "ROD-PARKING",
+  "MATERIAL": "SCR420H",
+  "ItemPick": [
+      "Surface Hardness @ Point A",
+      "Core Hardness"
+  ],
+  "ItemPickcode": [
+      {
+          "key": "ITEMs-5f5852ae35fb3c0c7428322d",
+          "value": "Surface Hardness @ Point A",
+          "METHOD": "MACHINE-5f19ab89fe12be0020dbd3c6"
+      },
+      {
+          "key": "ITEMs-5f19a9dafe12be0020dbd3be",
+          "value": "Core Hardness",
+          "METHOD": "MACHINE-5f19ab89fe12be0020dbd3c6"
+      }
+  ],
+  "POINTs": "",
+  "PCS": "",
+  "PCSleft": "",
+  "UNIT": "",
+  "INTERSEC": "",
+  "RESULTFORMAT":"",
+  "GRAPHTYPE": "",
+  "preview": [],
+  "confirmdata": [],
+  "ITEMleftUNIT": [],
+  "ITEMleftVALUE": [],
+  "MeasurmentFOR": "FINAL",
+  "inspectionItem": "",
+  "inspectionItemNAME": "",
+  "tool": "TPG-HRC-004",
+  "value": [],
+  "dateupdatevalue": "6/8/2022, 12:40:27 PM"
+},
+
+{
+  "INS": "TPG-HRC-004",
+  "PO": "2510271820",
+  "CP": "24007079",
+  "QTY": 1728,
+  "PROCESS": "HCQT+BOTAN",
+  "CUSLOT": "TPK-22-05-20",
+  "TPKLOT": "G22608GE01",
+  "FG": "21006567",
+  "CUSTOMER": "YST",
+  "PART": "26222-52F-0000-000J",
+  "PARTNAME": "HUB,TC TURBINE",
+  "MATERIAL": "",
+  "ItemPick": [
+      "Surface Hardness",
+      "Core Hardness"
+  ],
+  "ItemPickcode": [
+      {
+          "key": "ITEMs-5f19a97cfe12be0020dbd3bc",
+          "value": "Surface Hardness",
+          "METHOD": "MACHINE-5f19ab89fe12be0020dbd3c6"
+      },
+      {
+          "key": "ITEMs-5f19a9dafe12be0020dbd3be",
+          "value": "Core Hardness",
+          "METHOD": "MACHINE-5f19ab89fe12be0020dbd3c6"
+      }
+  ],
+  "POINTs": "1",
+  "PCS": "5",
+  "PCSleft": "0",
+  "UNIT": "HRA",
+  "INTERSEC": "",
+  "RESULTFORMAT":"",
+  "GRAPHTYPE": "",
+  "preview": [],
+  "confirmdata": [],
+  "ITEMleftUNIT": [
+      {
+          "V1": "FINAL",
+          "V2": "5"
+      }
+  ],
+  "ITEMleftVALUE": [
+      {
+          "V1": "ABC",
+          "V2": "555"
+      },
+      {
+          "V1": "Mean",
+          "V2": "555"
+      },
+      {
+          "V1": "ABC",
+          "V2": "555"
+      },
+      {
+          "V1": "Mean",
+          "V2": "555"
+      },
+      {
+          "V1": "ABC",
+          "V2": "555"
+      },
+      {
+          "V1": "Mean",
+          "V2": "555"
+      },
+      {
+          "V1": "ABC",
+          "V2": "555"
+      },
+      {
+          "V1": "Mean",
+          "V2": "555"
+      },
+      {
+          "V1": "ABC",
+          "V2": "555"
+      },
+      {
+          "V1": "Mean",
+          "V2": "555"
+      }
+  ],
+  "MeasurmentFOR": "FINAL",
+  "inspectionItem": "ITEMs-5f19a97cfe12be0020dbd3bc",
+  "inspectionItemNAME": "Surface Hardness",
+  "tool": "TPG-HRC-004",
+  "value": [],
+  "dateupdatevalue": "6/8/2022, 12:40:27 PM"
+}]
