@@ -382,8 +382,7 @@ router.post('/GASVIC001-geteachGRAPH', async (req, res) => {
     console.log(graph);
     GASVIC001db['GAPnameListdata'] = graph[0];//confirmdata
     GASVIC001db['GAP'] = GASVIC001db['GAPnameListdata'][`GT${GASVIC001db['confirmdata'].length + 1}`]
-  }
-  catch (err) {
+  } catch (err) {
 
   }
   //-------------------------------------
