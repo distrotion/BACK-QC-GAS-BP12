@@ -690,7 +690,7 @@ router.post('/GRAPH-recal', async (req, res) => {
         if (input['INTERSEC'] !== '') {
           core = parseFloat(input['INTERSEC'])
         } else {
-          core = parseFloat(axis_data[axis_data.length - 1]['y'])
+          core = parseFloat(axis_data[axis_data.length - 1]['y'])+50
         }
 
         //-----------------core
@@ -716,11 +716,11 @@ router.post('/GRAPH-recal', async (req, res) => {
           let feedbackupdateRESULTFORMAT = await mongodb.update(MAIN_DATA, MAIN, { "PO": input['PO'] }, { "$set": { 'FINAL_ANS': feedback[0]['FINAL_ANS'] } });
         }
         catch (err) {
-          TPGHMV002db[`INTERSEC_ERR`] = 1;
+          // TPGHMV002db[`INTERSEC_ERR`] = 1;
         }
         output = 'OK1';
         //
-      } else if (input["MODE"] == 'CDE') {
+      } else if (input["MODE"] == 'CDT') {
         let axis_data = [];
         for (i = 0; i < LISTbuffer.length; i++) {
           if (LISTbuffer[i]['PO1'] !== 'Mean') {
