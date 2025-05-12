@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 var mongodb = require('../../function/mongodb');
 var mssql = require('./../../function/mssql');
+const axios = require("../../function/axios");
 
 //----------------- date
 
@@ -46,7 +47,7 @@ router.post('/FINISHtoDB', async (req, res) => {
 
     output[nameFOR] = Tool;
     output['dateG'] = new Date();
-    output['dateGSTR'] =day;
+    output['dateGSTR'] = day;
 
     delete output['MeasurmentFOR'];
     delete output['tool'];
@@ -239,14 +240,14 @@ router.post('/FINISHtoDB-apr', async (req, res) => {
 
     console.log(input[`PCS`])
 
-    if(input[`PCS`] === '1' ||input[`PCS`] === 1){
-      Item[nameItem] = { "PSC1": value};
-    }else if(input[`PCS`] === '5'||input[`PCS`] === 5){
-      Item[nameItem] = { "PSC1": value,"PSC2": value,"PSC3": value,"PSC4": value,"PSC5": value };
-    }else if(input[`PCS`] === '10'||input[`PCS`] === 10){
-      Item[nameItem] = { "PSC1": value,"PSC2": value,"PSC3": value,"PSC4": value,"PSC5": value ,"PSC6": value,"PSC7": value,"PSC8": value,"PSC9": value,"PSC10": value};
-    }else{
-      Item[nameItem] = { "PSC1": value};
+    if (input[`PCS`] === '1' || input[`PCS`] === 1) {
+      Item[nameItem] = { "PSC1": value };
+    } else if (input[`PCS`] === '5' || input[`PCS`] === 5) {
+      Item[nameItem] = { "PSC1": value, "PSC2": value, "PSC3": value, "PSC4": value, "PSC5": value };
+    } else if (input[`PCS`] === '10' || input[`PCS`] === 10) {
+      Item[nameItem] = { "PSC1": value, "PSC2": value, "PSC3": value, "PSC4": value, "PSC5": value, "PSC6": value, "PSC7": value, "PSC8": value, "PSC9": value, "PSC10": value };
+    } else {
+      Item[nameItem] = { "PSC1": value };
     }
 
     // Item[nameItem] = { "PSC1": value,"PSC2": value,"PSC3": value,"PSC4": value,"PSC5": value ,"PSC6": value,"PSC7": value,"PSC8": value,"PSC9": value,"PSC10": value};
@@ -254,7 +255,7 @@ router.post('/FINISHtoDB-apr', async (req, res) => {
 
     output[nameFOR] = Tool;
     output['dateG'] = new Date();
-    output['dateGSTR'] =day;
+    output['dateGSTR'] = day;
 
     delete output['MeasurmentFOR'];
     delete output['tool'];
@@ -321,14 +322,14 @@ router.post('/FINISHtoDB-apr', async (req, res) => {
       let out_S2_1 = { "PO": input_S2_2.PO };
       let out_S2_2 = { $set: FOR }
 
-      if(input[`PCS`] === '1' ||input[`PCS`] === 1){
-        Item[nameItem] = { "PSC1": value};
-      }else if(input[`PCS`] === '5'||input[`PCS`] === 5){
-        Item[nameItem] = { "PSC1": value,"PSC2": value,"PSC3": value,"PSC4": value,"PSC5": value };
-      }else if(input[`PCS`] === '10'||input[`PCS`] === 10){
-        Item[nameItem] = { "PSC1": value,"PSC2": value,"PSC3": value,"PSC4": value,"PSC5": value ,"PSC6": value,"PSC7": value,"PSC8": value,"PSC9": value,"PSC10": value};
-      }else{
-        Item[nameItem] = { "PSC1": value};
+      if (input[`PCS`] === '1' || input[`PCS`] === 1) {
+        Item[nameItem] = { "PSC1": value };
+      } else if (input[`PCS`] === '5' || input[`PCS`] === 5) {
+        Item[nameItem] = { "PSC1": value, "PSC2": value, "PSC3": value, "PSC4": value, "PSC5": value };
+      } else if (input[`PCS`] === '10' || input[`PCS`] === 10) {
+        Item[nameItem] = { "PSC1": value, "PSC2": value, "PSC3": value, "PSC4": value, "PSC5": value, "PSC6": value, "PSC7": value, "PSC8": value, "PSC9": value, "PSC10": value };
+      } else {
+        Item[nameItem] = { "PSC1": value };
       }
       // Item[nameItem] = {  "PSC1": value,"PSC2": value,"PSC3": value,"PSC4": value,"PSC5": value ,"PSC6": value,"PSC7": value,"PSC8": value,"PSC9": value,"PSC10": value};
       // outputs=[out_S2_1,out_S2_2]
@@ -360,14 +361,14 @@ router.post('/FINISHtoDB-apr', async (req, res) => {
         let Tool = {};
         let FOR = input_S3_1[nameFOR];
 
-        if(input[`PCS`] === '1' ||input[`PCS`] === 1){
-          Item[nameItem] = { "PSC1": value};
-        }else if(input[`PCS`] === '5'||input[`PCS`] === 5){
-          Item[nameItem] = { "PSC1": value,"PSC2": value,"PSC3": value,"PSC4": value,"PSC5": value };
-        }else if(input[`PCS`] === '10'||input[`PCS`] === 10){
-          Item[nameItem] = { "PSC1": value,"PSC2": value,"PSC3": value,"PSC4": value,"PSC5": value ,"PSC6": value,"PSC7": value,"PSC8": value,"PSC9": value,"PSC10": value};
-        }else{
-          Item[nameItem] = { "PSC1": value};
+        if (input[`PCS`] === '1' || input[`PCS`] === 1) {
+          Item[nameItem] = { "PSC1": value };
+        } else if (input[`PCS`] === '5' || input[`PCS`] === 5) {
+          Item[nameItem] = { "PSC1": value, "PSC2": value, "PSC3": value, "PSC4": value, "PSC5": value };
+        } else if (input[`PCS`] === '10' || input[`PCS`] === 10) {
+          Item[nameItem] = { "PSC1": value, "PSC2": value, "PSC3": value, "PSC4": value, "PSC5": value, "PSC6": value, "PSC7": value, "PSC8": value, "PSC9": value, "PSC10": value };
+        } else {
+          Item[nameItem] = { "PSC1": value };
         }
 
         // Item[nameItem] = {  "PSC1": value,"PSC2": value,"PSC3": value,"PSC4": value,"PSC5": value ,"PSC6": value,"PSC7": value,"PSC8": value,"PSC9": value,"PSC10": value };
@@ -409,12 +410,12 @@ router.post('/FINISHtoDB-apr', async (req, res) => {
           let FOR = input_S4_1[nameFOR];
           let Tool = FOR[nameTool];
           let Item = Tool
-          if(input[`PCS`] === '1' ||input[`PCS`] === 1){
-            Item[nameItem] = { "PSC1": value};
-          }else if(input[`PCS`] === '5'||input[`PCS`] === 5){
-            Item[nameItem] = { "PSC1": value,"PSC2": value,"PSC3": value,"PSC4": value,"PSC5": value };
-          }else {
-            Item[nameItem] = { "PSC1": value,"PSC2": value,"PSC3": value,"PSC4": value,"PSC5": value ,"PSC6": value,"PSC7": value,"PSC8": value,"PSC9": value,"PSC10": value};
+          if (input[`PCS`] === '1' || input[`PCS`] === 1) {
+            Item[nameItem] = { "PSC1": value };
+          } else if (input[`PCS`] === '5' || input[`PCS`] === 5) {
+            Item[nameItem] = { "PSC1": value, "PSC2": value, "PSC3": value, "PSC4": value, "PSC5": value };
+          } else {
+            Item[nameItem] = { "PSC1": value, "PSC2": value, "PSC3": value, "PSC4": value, "PSC5": value, "PSC6": value, "PSC7": value, "PSC8": value, "PSC9": value, "PSC10": value };
           }
           // Item[nameItem] = {  "PSC1": value,"PSC2": value,"PSC3": value,"PSC4": value,"PSC5": value ,"PSC6": value,"PSC7": value,"PSC8": value,"PSC9": value,"PSC10": value };
           let out_S4_1 = { PO: input_S4_2.PO };
@@ -674,7 +675,7 @@ router.post('/GRAPH-recal', async (req, res) => {
         LISTbuffer.push(...ob[oblist[i]])
       }
 
-      
+
       if (input["MODE"] == 'CDE') {
 
         //
@@ -690,7 +691,7 @@ router.post('/GRAPH-recal', async (req, res) => {
         if (input['INTERSEC'] !== '') {
           core = parseFloat(input['INTERSEC'])
         } else {
-          core = parseFloat(axis_data[axis_data.length - 1]['y'])+50
+          core = parseFloat(axis_data[axis_data.length - 1]['y']) + 50
         }
 
         //-----------------core
@@ -791,6 +792,56 @@ router.post('/GRAPH-recal', async (req, res) => {
   return res.json(output);
 });
 
+router.post('/GETHMVATPOINT', async (req, res) => {
+  //-------------------------------------
+  console.log('--GETHMVATPOINT--');
+  console.log(req.body);
+  let input = req.body;
+  //-------------------------------------
+  let output = "NOK";
+  //-------------------------------------
+
+  if (input[`PO`] !== undefined && input[`NAME_INS`] !== undefined&& input[`POINT`] !== undefined) {
+
+
+
+    let testDB = await mongodb.find(MAIN_DATA, MAIN, { "PO": input[`PO`] });
+
+    try {
+      if (testDB.length > 0) {
+        // let ob = testDB[0]['FINAL'][input["NAME_INS"]][input["ITEMs"]];
+        let ob1 = testDB[0]['FINAL'][input["NAME_INS"]];
+        let ob2 = testDB[0]['CHECKlist'];
+  
+        // console.log(ob1);
+        // console.log(ob2);
+        for (let i = 0; i < ob2.length; i++) {
+          if (ob1[ob2[i]['key']] != undefined) {
+            // console.log(ob1[ob2[i]['key']]['PSC1'][parseInt(input[`POINT`])]);
+
+            output = `${ob1[ob2[i]['key']]['PSC1'][parseInt(input[`POINT`])]['PO3']}`
+            let dataCheck = await axios.post("http://localhost:16180/Refgraph-preview",[{"V1":"ref1","V2":output}])
+          }
+  
+        }
+  
+  
+      }
+    } catch (error) {
+      
+    }
+
+   
+
+  }
+
+
+
+
+
+  return res.json(output);
+});
+
 
 router.post('/ISNHESreport', async (req, res) => {
   //-------------------------------------
@@ -820,7 +871,7 @@ router.post('/ISNHESreport', async (req, res) => {
     // "FINAL_ANS" : { $exists : false },
   }
 
-  output = await mongodb.findproject(MAIN_DATA, MAIN, out,{"PO":1,"CP":1,"MATCP":1,"CUSTOMER":1,"PART":1,"PARTNAME":1,"MATERIAL":1,"CUSLOTNO":1});
+  output = await mongodb.findproject(MAIN_DATA, MAIN, out, { "PO": 1, "CP": 1, "MATCP": 1, "CUSTOMER": 1, "PART": 1, "PARTNAME": 1, "MATERIAL": 1, "CUSLOTNO": 1 });
   console.log(output)
 
 

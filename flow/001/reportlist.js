@@ -300,10 +300,13 @@ router.post('/CopyReport', async (req, res) => {
 
     let find = await mongodb.find("ORDER", "ORDER", {});
     if (find.length > 0) {
+
       let sapdata = find[0][`DATA`];
       let CUSLOTNOd = ``
+      console.log(input[`new`] );
       for (i = 0; i < sapdata.length; i++) {
         if (input[`new`] === sapdata[i][`PO`]) {
+          console.log(input[`new`] );
           newdataHEAD = sapdata[i];
           CUSLOTNOd = CUSLOTNOd+ sapdata[i][`CUSLOTNO`]+`,`
           // break;
@@ -311,6 +314,7 @@ router.post('/CopyReport', async (req, res) => {
       }
 
       if (newdataHEAD[`CP`] != undefined) {
+
         let testDB = await mongodb.find(MAIN_DATA, MAIN, { "PO": input[`new`] });
         if (testDB.length === 0) {
           let origianlDB = await mongodb.find(MAIN_DATA, MAIN, { "PO": input[`original`] });
@@ -378,6 +382,8 @@ router.post('/CopyReport', async (req, res) => {
 
   return res.json(output);
 });
+
+
 
 
 
