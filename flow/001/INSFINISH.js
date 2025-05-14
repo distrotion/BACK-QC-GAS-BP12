@@ -871,7 +871,7 @@ router.post('/ISNHESreport', async (req, res) => {
     // "FINAL_ANS" : { $exists : false },
   }
 
-  output = await mongodb.findproject(MAIN_DATA, MAIN, out, { "PO": 1, "CP": 1, "MATCP": 1, "CUSTOMER": 1, "PART": 1, "PARTNAME": 1, "MATERIAL": 1, "CUSLOTNO": 1 });
+  output = await mongodb.findproject(MAIN_DATA, MAIN, out, { "PO": 1, "CP": 1, "MATCP": 1, "CUSTOMER": 1, "PART": 1, "PARTNAME": 1, "MATERIAL": 1, "CUSLOTNO": 1 , "IDInspected": 1 , "IDCheck": 1 , "IDApprove": 1 });
   console.log(output)
 
 
