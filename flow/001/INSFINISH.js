@@ -879,6 +879,70 @@ router.post('/ISNHESreport', async (req, res) => {
   return res.json(output);
 });
 
+router.post('/Inspected-sign', async (req, res) => {
+  //-------------------------------------
+  console.log('--Inspected-sign--');
+  // console.log(req.body);
+  let input = req.body;
+  //-------------------------------------
+  let output = 'NOK'
+
+  if(input['ID'] != undefined && input['PO'] != undefined){
+    let sign = {
+      'dateInspected':`${Date.now()}`,
+      'IDInspected':input['ID'],
+    }
+    let upd = await mongodb.update(MAIN_DATA, MAIN, { "PO": input['PO'] }, { $set: sign });
+    output = 'OK'
+  }
+
+  //-------------------------------------
+  res.json(output);
+});
+
+
+router.post('/Check-sign', async (req, res) => {
+  //-------------------------------------
+  console.log('--Check-sign--');
+  // console.log(req.body);
+  let input = req.body;
+  //-------------------------------------
+  let output = 'NOK'
+
+  if(input['ID'] != undefined && input['PO'] != undefined){
+    let sign = {
+      'dateCheck':`${Date.now()}`,
+      'IDCheck':input['ID'],
+    }
+    let upd = await mongodb.update(MAIN_DATA, MAIN, { "PO": input['PO'] }, { $set: sign });
+    output = 'OK'
+  }
+
+  //-------------------------------------
+  res.json(output);
+});
+
+router.post('/Approve-sign', async (req, res) => {
+  //-------------------------------------
+  console.log('--Check-sign--');
+  // console.log(req.body);
+  let input = req.body;
+  //-------------------------------------
+  let output = 'NOK'
+
+  if(input['ID'] != undefined && input['PO'] != undefined){
+    let sign = {
+      'dateApprove':`${Date.now()}`,
+      'IDApprove':input['ID'],
+    }
+    let upd = await mongodb.update(MAIN_DATA, MAIN, { "PO": input['PO'] }, { $set: sign });
+    output = 'OK'
+  }
+
+  //-------------------------------------
+  res.json(output);
+});
+
 
 //let objectR = Object.getOwnPropertyNames(input_S2_1)
 
