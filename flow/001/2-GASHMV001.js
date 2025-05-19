@@ -122,7 +122,7 @@ router.post('/GETINtoGASHMV001', async (req, res) => {
   check = GASHMV001db;
   if (input['PO'] !== undefined && input['CP'] !== undefined && check['PO'] === '') {
     // let dbsap = await mssql.qurey(`select * FROM [SAPData_HES_ISN].[dbo].[tblSAPDetail] where [PO] = ${input['PO']}`);
-    
+
     let findPO = await mongodb.findSAP('mongodb://172.23.10.32:27017', "ORDER", "ORDER", {});
 
     let cuslot = '';
@@ -133,7 +133,7 @@ router.post('/GETINtoGASHMV001', async (req, res) => {
         if (findPO[0][`DATA`][i][`PO`] === input['PO']) {
           dbsap = findPO[0][`DATA`][i];
           // break;
-          cuslot = cuslot+ findPO[0][`DATA`][i][`CUSLOTNO`]+ ','
+          cuslot = cuslot + findPO[0][`DATA`][i][`CUSLOTNO`] + ','
 
 
         }
@@ -172,11 +172,11 @@ router.post('/GETINtoGASHMV001', async (req, res) => {
         }
         var picS = "";
         // console.log(findcp[0]['Pimg'])
-        if(findcp.length >0){
-          if(findcp[0]['Pimg'] !== undefined ){
+        if (findcp.length > 0) {
+          if (findcp[0]['Pimg'] !== undefined) {
             picS = `${findcp[0]['Pimg'][`P1`]}`
           }
-          
+
         }
 
 
@@ -203,7 +203,7 @@ router.post('/GETINtoGASHMV001', async (req, res) => {
           "QUANTITY": dbsap['QUANTITY'] || '',
           // "PROCESS":dbsap ['PROCESS'] || '',
           // "CUSLOTNO": dbsap['CUSLOTNO'] || '',
-          "CUSLOTNO":  cuslot,
+          "CUSLOTNO": cuslot,
           "FG_CHARG": dbsap['FG_CHARG'] || '',
           "PARTNAME_PO": dbsap['PARTNAME_PO'] || '',
           "PART_PO": dbsap['PART_PO'] || '',
@@ -666,6 +666,14 @@ router.post('/GASHMV001-feedback', async (req, res) => {
               let feedbackupdateRESULTFORMAT = await mongodb.update(MAIN_DATA, MAIN, { "PO": input['PO'] }, { "$set": { 'FINAL_ANS': feedback[0]['FINAL_ANS'] } });
 
 
+            } else {
+              let dataCheck = await axios.post("http://localhost:16180/GRAPH-recal", { 
+                "PO": GASHMV001db["PO"], 
+                "MODE":"CDE",
+                "ITEMs":"ITEMs-5f19aaa2fe12be0020dbd3c2",
+                "NAME_INS":"GAS-HMV-001",
+                "INTERSEC":""
+              })
             }
 
           } else if (masterITEMs[0]['RESULTFORMAT'] === 'Picture') {
@@ -692,10 +700,10 @@ router.post('/GASHMV001-feedback', async (req, res) => {
         if (CHECKlistdataFINISH.length === feedback[0]['CHECKlist'].length) {
           // feedback[0]['FINAL_ANS']["ALL_DONE"] = "DONE";
           // feedback[0]['FINAL_ANS']["PO_judgment"] ="pass";
-          let dataCheck = await axios.post("http://localhost:16180/JUDEMENT",{"PO":GASHMV001db["PO"],"CP":GASHMV001db["CP"]})
+          let dataCheck = await axios.post("http://localhost:16180/JUDEMENT", { "PO": GASHMV001db["PO"], "CP": GASHMV001db["CP"] })
           let resultdataCheck = 'pass'
-          for(let i = 0;i<dataCheck.length;i++){
-            if(dataCheck[i]['result'] !== 'OK'){
+          for (let i = 0; i < dataCheck.length; i++) {
+            if (dataCheck[i]['result'] !== 'OK') {
               resultdataCheck = 'no pass';
               break;
             }
