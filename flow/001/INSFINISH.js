@@ -216,8 +216,17 @@ router.post('/FINISHtoDB', async (req, res) => {
     }
 
   }
+  if (input['tool'] != undefined && input['USER'] != undefined) {
+    let wherePO = { "PO": input['PO'] }
+    //input['tool']
+    let nameTool = input['tool'];
+    let updateset = {}
+    updateset[nameTool] = input['USER']
+
+    let upd = await mongodb.update(MAIN_DATA, MAIN, wherePO, updateset);
+  }
   //-------------------------------------
-  res.json(outputs);
+  return res.json(outputs);
 });
 
 router.post('/FINISHtoDB-apr', async (req, res) => {
@@ -451,8 +460,18 @@ router.post('/FINISHtoDB-apr', async (req, res) => {
     }
 
   }
+
+  if (input['tool'] != undefined && input['USER'] != undefined) {
+    let wherePO = { "PO": input['PO'] }
+    //input['tool']
+    let nameTool = input['tool'];
+    let updateset = {}
+    updateset[nameTool] = input['USER']
+    console.log(updateset);
+    let upd = await mongodb.update(MAIN_DATA, MAIN, wherePO, updateset);
+  }
   //-------------------------------------
-  res.json(outputs);
+  return res.json(outputs);
 });
 
 // router.post('/FINISHtoDB-apr', async (req, res) => {
@@ -691,7 +710,12 @@ router.post('/GRAPH-recal', async (req, res) => {
         if (input['INTERSEC'] !== '') {
           core = parseFloat(input['INTERSEC'])
         } else {
-          core = parseFloat(axis_data[axis_data.length - 1]['y']) + 50
+          if (input['CORE'] != undefined) {
+            core = parseFloat(axis_data[axis_data.length - 1]['y']) + parseFloat(input['CORE'])
+          } else {
+            core = parseFloat(axis_data[axis_data.length - 1]['y']) + 50
+          }
+
         }
 
         //-----------------core
@@ -801,7 +825,7 @@ router.post('/GETHMVATPOINT', async (req, res) => {
   let output = "NOK";
   //-------------------------------------
 
-  if (input[`PO`] !== undefined && input[`NAME_INS`] !== undefined&& input[`POINT`] !== undefined) {
+  if (input[`PO`] !== undefined && input[`NAME_INS`] !== undefined && input[`POINT`] !== undefined) {
 
 
 
@@ -812,7 +836,7 @@ router.post('/GETHMVATPOINT', async (req, res) => {
         // let ob = testDB[0]['FINAL'][input["NAME_INS"]][input["ITEMs"]];
         let ob1 = testDB[0]['FINAL'][input["NAME_INS"]];
         let ob2 = testDB[0]['CHECKlist'];
-  
+
         // console.log(ob1);
         // console.log(ob2);
         for (let i = 0; i < ob2.length; i++) {
@@ -820,18 +844,18 @@ router.post('/GETHMVATPOINT', async (req, res) => {
             // console.log(ob1[ob2[i]['key']]['PSC1'][parseInt(input[`POINT`])]);
 
             output = `${ob1[ob2[i]['key']]['PSC1'][parseInt(input[`POINT`])]['PO3']}`
-            let dataCheck = await axios.post("http://localhost:16180/Refgraph-preview",[{"V1":"ref1","V2":output}])
+            let dataCheck = await axios.post("http://localhost:16180/Refgraph-preview", [{ "V1": "ref1", "V2": output }])
           }
-  
+
         }
-  
-  
+
+
       }
     } catch (error) {
-      
+
     }
 
-   
+
 
   }
 
@@ -871,7 +895,7 @@ router.post('/ISNHESreport', async (req, res) => {
     // "FINAL_ANS" : { $exists : false },
   }
 
-  output = await mongodb.findproject(MAIN_DATA, MAIN, out, { "PO": 1, "CP": 1, "MATCP": 1, "CUSTOMER": 1, "PART": 1, "PARTNAME": 1, "MATERIAL": 1, "CUSLOTNO": 1 , "IDInspected": 1 , "IDCheck": 1 , "IDApprove": 1 });
+  output = await mongodb.findproject(MAIN_DATA, MAIN, out, { "PO": 1, "CP": 1, "MATCP": 1, "CUSTOMER": 1, "PART": 1, "PARTNAME": 1, "MATERIAL": 1, "CUSLOTNO": 1, "IDInspected": 1, "IDCheck": 1, "IDApprove": 1 });
   console.log(output)
 
 
@@ -887,17 +911,17 @@ router.post('/Inspected-sign', async (req, res) => {
   //-------------------------------------
   let output = 'NOK'
 
-  if(input['ID'] != undefined && input['PO'] != undefined){
+  if (input['ID'] != undefined && input['PO'] != undefined) {
     let sign = {
-      'dateInspected':`${Date.now()}`,
-      'IDInspected':input['ID'],
+      'dateInspected': `${Date.now()}`,
+      'IDInspected': input['ID'],
     }
     let upd = await mongodb.update(MAIN_DATA, MAIN, { "PO": input['PO'] }, { $set: sign });
     output = 'OK'
   }
 
   //-------------------------------------
-  res.json(output);
+  return res.json(output);
 });
 
 
@@ -909,17 +933,17 @@ router.post('/Check-sign', async (req, res) => {
   //-------------------------------------
   let output = 'NOK'
 
-  if(input['ID'] != undefined && input['PO'] != undefined){
+  if (input['ID'] != undefined && input['PO'] != undefined) {
     let sign = {
-      'dateCheck':`${Date.now()}`,
-      'IDCheck':input['ID'],
+      'dateCheck': `${Date.now()}`,
+      'IDCheck': input['ID'],
     }
     let upd = await mongodb.update(MAIN_DATA, MAIN, { "PO": input['PO'] }, { $set: sign });
     output = 'OK'
   }
 
   //-------------------------------------
-  res.json(output);
+  return res.json(output);
 });
 
 router.post('/Approve-sign', async (req, res) => {
@@ -930,17 +954,17 @@ router.post('/Approve-sign', async (req, res) => {
   //-------------------------------------
   let output = 'NOK'
 
-  if(input['ID'] != undefined && input['PO'] != undefined){
+  if (input['ID'] != undefined && input['PO'] != undefined) {
     let sign = {
-      'dateApprove':`${Date.now()}`,
-      'IDApprove':input['ID'],
+      'dateApprove': `${Date.now()}`,
+      'IDApprove': input['ID'],
     }
     let upd = await mongodb.update(MAIN_DATA, MAIN, { "PO": input['PO'] }, { $set: sign });
     output = 'OK'
   }
 
   //-------------------------------------
-  res.json(output);
+  return res.json(output);
 });
 
 

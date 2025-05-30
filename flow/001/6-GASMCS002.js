@@ -79,6 +79,9 @@ let GASMCS002db = {
   "dateupdatevalue": day,
   //
   "PIC": "",
+   //----------------------
+  "USER": "",
+  "USERID": "",
 }
 
 router.get('/CHECK-GASMCS002', async (req, res) => {
@@ -227,6 +230,9 @@ router.post('/GETINtoGASMCS002', async (req, res) => {
           "dateupdatevalue": day,
           //
           "PIC": picS,
+          //----------------------
+          "USER": input['USER'],
+          "USERID": input['USERID'],
         }
 
         output = 'OK';
@@ -622,6 +628,9 @@ router.post('/GASMCS002-SETZERO', async (req, res) => {
       "dateupdatevalue": day,
       //
       "PIC": "",
+      //----------------------
+  "USER": "",
+  "USERID": "",
     }
     output = 'OK';
   }

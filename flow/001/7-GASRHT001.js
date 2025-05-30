@@ -84,6 +84,9 @@ let GASRHT001db = {
   "INTERSEC_ERR": 0,
   //
   "PIC": "",
+   //----------------------
+  "USER": "",
+  "USERID": "",
 }
 
 
@@ -238,6 +241,9 @@ router.post('/GETINtoGASRHT001', async (req, res) => {
           "INTERSEC_ERR": 0,
           //
           "PIC": picS,
+          //----------------------
+          "USER": input['USER'],
+          "USERID": input['USERID'],
         }
 
         output = 'OK';
@@ -770,6 +776,9 @@ router.post('/GASRHT001-SETZERO', async (req, res) => {
       "INTERSEC_ERR": 0,
       //
       "PIC": "",
+      //----------------------
+  "USER": "",
+  "USERID": "",
     }
     output = 'OK';
   }

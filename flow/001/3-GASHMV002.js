@@ -84,6 +84,9 @@ let GASHMV002db = {
   "INTERSEC_ERR": 0,
   //
   "PIC": "",
+  //----------------------
+  "USER": "",
+  "USERID": "",
 }
 
 
@@ -237,6 +240,9 @@ router.post('/GETINtoGASHMV002', async (req, res) => {
           "INTERSEC_ERR": 0,
           //
           "PIC": picS,
+          //----------------------
+          "USER": input['USER'],
+          "USERID": input['USERID'],
         }
 
         output = 'OK';
@@ -667,7 +673,7 @@ router.post('/GASHMV002-feedback', async (req, res) => {
             } else {
               let dataCheck = await axios.post("http://localhost:16180/GRAPH-recal", {
                 "PO": GASHMV002db["PO"],
-                "MODE":"CDE",
+                "MODE": "CDE",
                 "ITEMs": "ITEMs-5f19aaa2fe12be0020dbd3c2",
                 "NAME_INS": "GAS-HMV-002",
                 "INTERSEC": ""
@@ -782,6 +788,9 @@ router.post('/GASHMV002-SETZERO', async (req, res) => {
       "INTERSEC_ERR": 0,
       //
       "PIC": "",
+      //----------------------
+      "USER": "",
+      "USERID": "",
     }
     output = 'OK';
   }

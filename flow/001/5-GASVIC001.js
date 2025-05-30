@@ -84,6 +84,9 @@ let GASVIC001db = {
   "INTERSEC_ERR": 0,
   //
   "PIC": "",
+   //----------------------
+  "USER": "",
+  "USERID": "",
 }
 
 
@@ -238,6 +241,9 @@ router.post('/GETINtoGASVIC001', async (req, res) => {
           "INTERSEC_ERR": 0,
           //
           "PIC": picS,
+          //----------------------
+          "USER": input['USER'],
+          "USERID": input['USERID'],
         }
 
         output = 'OK';
@@ -769,6 +775,9 @@ router.post('/GASVIC001-SETZERO', async (req, res) => {
       "INTERSEC_ERR": 0,
       //
       "PIC": "",
+      //----------------------
+  "USER": "",
+  "USERID": "",
     }
     output = 'OK';
   }

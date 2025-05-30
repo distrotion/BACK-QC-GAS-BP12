@@ -84,6 +84,9 @@ let GASOHR001db = {
   "INTERSEC_ERR": 0,
   //
   "PIC": "",
+  //----------------------
+  "USER": "",
+  "USERID": "",
 }
 
 
@@ -133,7 +136,7 @@ router.post('/GETINtoGASOHR001', async (req, res) => {
         if (findPO[0][`DATA`][i][`PO`] === input['PO']) {
           dbsap = findPO[0][`DATA`][i];
           // break;
-          cuslot = cuslot+ findPO[0][`DATA`][i][`CUSLOTNO`]+ ','
+          cuslot = cuslot + findPO[0][`DATA`][i][`CUSLOTNO`] + ','
         }
       }
 
@@ -171,11 +174,11 @@ router.post('/GETINtoGASOHR001', async (req, res) => {
         }
         var picS = "";
         // console.log(findcp[0]['Pimg'])
-        if(findcp.length >0){
-          if(findcp[0]['Pimg'] !== undefined ){
+        if (findcp.length > 0) {
+          if (findcp[0]['Pimg'] !== undefined) {
             picS = `${findcp[0]['Pimg'][`P1`]}`
           }
-          
+
         }
 
 
@@ -202,7 +205,7 @@ router.post('/GETINtoGASOHR001', async (req, res) => {
           "QUANTITY": dbsap['QUANTITY'] || '',
           // "PROCESS":dbsap ['PROCESS'] || '',
           // "CUSLOTNO": dbsap['CUSLOTNO'] || '',
-          "CUSLOTNO":  cuslot,
+          "CUSLOTNO": cuslot,
           "FG_CHARG": dbsap['FG_CHARG'] || '',
           "PARTNAME_PO": dbsap['PARTNAME_PO'] || '',
           "PART_PO": dbsap['PART_PO'] || '',
@@ -238,6 +241,9 @@ router.post('/GETINtoGASOHR001', async (req, res) => {
           "INTERSEC_ERR": 0,
           //
           "PIC": picS,
+          //----------------------
+          "USER": input['USER'],
+          "USERID": input['USERID'],
         }
 
         output = 'OK';
@@ -686,10 +692,10 @@ router.post('/GASOHR001-feedback', async (req, res) => {
         if (CHECKlistdataFINISH.length === feedback[0]['CHECKlist'].length) {
           // feedback[0]['FINAL_ANS']["ALL_DONE"] = "DONE";
           // feedback[0]['FINAL_ANS']["PO_judgment"] ="pass";
-          let dataCheck = await axios.post("http://localhost:16180/JUDEMENT",{"PO":GASOHR001db["PO"],"CP":GASOHR001db["CP"]})
+          let dataCheck = await axios.post("http://localhost:16180/JUDEMENT", { "PO": GASOHR001db["PO"], "CP": GASOHR001db["CP"] })
           let resultdataCheck = 'pass'
-          for(let i = 0;i<dataCheck.length;i++){
-            if(dataCheck[i]['result'] !== 'OK'){
+          for (let i = 0; i < dataCheck.length; i++) {
+            if (dataCheck[i]['result'] !== 'OK') {
               resultdataCheck = 'no pass';
               break;
             }
@@ -770,6 +776,9 @@ router.post('/GASOHR001-SETZERO', async (req, res) => {
       "INTERSEC_ERR": 0,
       //
       "PIC": "",
+      //----------------------
+      "USER": "",
+      "USERID": "",
     }
     output = 'OK';
   }

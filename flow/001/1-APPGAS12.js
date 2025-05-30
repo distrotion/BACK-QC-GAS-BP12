@@ -79,6 +79,9 @@ let APPGAS12db = {
   "dateupdatevalue": day,
   //
   "PIC": "",
+  //----------------------
+  "USER": "",
+  "USERID": "",
 }
 
 router.get('/CHECK-APPGAS12', async (req, res) => {
@@ -125,7 +128,7 @@ router.post('/GETINtoAPPGAS12', async (req, res) => {
         if (findPO[0][`DATA`][i][`PO`] === input['PO']) {
           dbsap = findPO[0][`DATA`][i];
           // break;
-          cuslot = cuslot+ findPO[0][`DATA`][i][`CUSLOTNO`]+ ','
+          cuslot = cuslot + findPO[0][`DATA`][i][`CUSLOTNO`] + ','
         }
       }
 
@@ -162,11 +165,11 @@ router.post('/GETINtoAPPGAS12', async (req, res) => {
         }
         var picS = "";
         // console.log(findcp[0]['Pimg'])
-        if(findcp.length >0){
-          if(findcp[0]['Pimg'] !== undefined ){
+        if (findcp.length > 0) {
+          if (findcp[0]['Pimg'] !== undefined) {
             picS = `${findcp[0]['Pimg'][`P1`]}`
           }
-          
+
         }
 
         APPGAS12db = {
@@ -193,7 +196,7 @@ router.post('/GETINtoAPPGAS12', async (req, res) => {
           // "CUSLOTNO": dbsap['CUSLOTNO'] || '',
           //CUST_FULLNM
           //findcp[0]['CUST_FULLNM'] || '',
-          "CUSLOTNO":  cuslot,
+          "CUSLOTNO": cuslot,
           "FG_CHARG": dbsap['FG_CHARG'] || '',
           "PARTNAME_PO": dbsap['PARTNAME_PO'] || '',
           "PART_PO": dbsap['PART_PO'] || '',
@@ -225,6 +228,9 @@ router.post('/GETINtoAPPGAS12', async (req, res) => {
           "dateupdatevalue": day,
           //
           "PIC": picS,
+          //----------------------
+          "USER": input['USER'],
+          "USERID": input['USERID'],
         }
 
         output = 'OK';
@@ -598,6 +604,9 @@ router.post('/APPGAS12-SETZERO', async (req, res) => {
       "dateupdatevalue": day,
       //
       "PIC": "",
+      //----------------------
+      "USER": "",
+      "USERID": "",
     }
     output = 'OK';
   }
