@@ -515,6 +515,8 @@ router.post('/GASOHR001-feedback', async (req, res) => {
         for (i = 0; i < feedback[0]['CHECKlist'].length; i++) {
           if (input["ITEMs"] === feedback[0]['CHECKlist'][i]['key']) {
             feedback[0]['CHECKlist'][i]['FINISH'] = 'OK';
+            feedback[0]['CHECKlist'][i]['timestamp'] = `${Date.now()}`;
+            feedback[0]['CHECKlist'][i]['ID'] = ``;
             // console.log(feedback[0]['CHECKlist']);
             let feedbackupdate = await mongodb.update(MAIN_DATA, MAIN, { "PO": input['PO'] }, { "$set": { 'CHECKlist': feedback[0]['CHECKlist'] } });
             break;
