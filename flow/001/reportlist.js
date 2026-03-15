@@ -143,27 +143,27 @@ router.post('/ReportListACT', async (req, res) => {
     }
 
 
-  // var d = new Date();
-  // d.setFullYear(d.getFullYear(), d.getMonth(), 1);
+    // var d = new Date();
+    // d.setFullYear(d.getFullYear(), d.getMonth(), 1);
 
-  // var dc = new Date();
-  // dc.setFullYear(dc.getFullYear(), dc.getMonth(), 7);
-  
+    // var dc = new Date();
+    // dc.setFullYear(dc.getFullYear(), dc.getMonth(), 7);
+
     var d = new Date();
     d.setFullYear(startY, startM, startD);
     d.setDate(d.getDate() - 1);
     var dc = new Date();
     dc.setFullYear(stoptY, stoptM, stoptD);
     dc.setDate(dc.getDate() + 1);
-    
+
 
     console.log(d)
     console.log(dc)
-  
+
     // day = `${d.getFullYear()}-${(d.getMonth() + 1).pad(2)}-${(d.getDate()).pad(2)}`
     // dayC = `${dc.getFullYear()}-${(dc.getMonth() + 1).pad(2)}-${(dc.getDate()).pad(2)}`
     // tim = `${(d.getHours()).pad(2)}:${(d.getMinutes()).pad(2)}:${(d.getSeconds()).pad(2)}`
-  
+
     out = {
       "ALL_DONE": 'DONE',
       "dateG":
@@ -175,7 +175,7 @@ router.post('/ReportListACT', async (req, res) => {
     // console.log(out)
     let find = await mongodb.find(MAIN_DATA, MAIN, out);
     let masterITEMs = await mongodb.find(master_FN, ITEMs, {});
-   
+
     for (i = 0; i < find.length; i++) {
       //
       // console.log(Object.getOwnPropertyNames(find[i]["FINAL"]));
@@ -187,28 +187,28 @@ router.post('/ReportListACT', async (req, res) => {
         let Itemlist = Object.getOwnPropertyNames(find[i]["FINAL"][INS[j]]);
         // console.log(Itemlist);
         for (k = 0; k < Itemlist.length; k++) {
-  
+
           if (Item[Itemlist[k]]["PSC1"] != undefined) {
-  
+
             if (Item[Itemlist[k]]["PSC1"].length === undefined) {
               // console.log(Item[Itemlist[k]]["PSC1"]["PO1"]);
               let name = "";
-                    for (s = 0; s < masterITEMs.length; s++) {
-                      if (masterITEMs[s]["masterID"] === Itemlist[k]) {
-                        // console.log(masterITEMs[s]["ITEMs"]);
-                        name = masterITEMs[s]["ITEMs"];
-                        let data = {}
-                        data[name] = Item[Itemlist[k]]["PSC1"]["PO2"];
-                        if (data[name].length > 0) {
-                          depDATAlist.push(data)
-                        }
-                        break;
-                      }
-                    }
+              for (s = 0; s < masterITEMs.length; s++) {
+                if (masterITEMs[s]["masterID"] === Itemlist[k]) {
+                  // console.log(masterITEMs[s]["ITEMs"]);
+                  name = masterITEMs[s]["ITEMs"];
+                  let data = {}
+                  data[name] = Item[Itemlist[k]]["PSC1"]["PO2"];
+                  if (data[name].length > 0) {
+                    depDATAlist.push(data)
+                  }
+                  break;
+                }
+              }
             } else {
               // console.log(Item[Itemlist[k]]["PSC1"].length);
               let deppdata = Item[Itemlist[k]]["PSC1"];
-  
+
               // console.log(deppdata);
               for (l = 0; l < deppdata.length; l++) {
                 if (deppdata[l]["PO1"] === undefined) {
@@ -227,10 +227,10 @@ router.post('/ReportListACT', async (req, res) => {
                     }
                   }
                   // console.log([deppdata[l]["PIC1data"],deppdata[l]["PIC2data"],deppdata[l]["PIC3data"],deppdata[l]["PIC4data"]]);
-  
-  
+
+
                 } else {
-  
+
                   if (deppdata[l]["PO1"] !== "Mean") {
                     // console.log(deppdata[l]["PO1"]);
                     // console.log(deppdata[l]["PO3"]);
@@ -248,36 +248,36 @@ router.post('/ReportListACT', async (req, res) => {
                         break;
                       }
                     }
-  
+
                   }
                 }
-  
+
               }
-  
+
             }
           }
         }
-  
+
       }
       // console.log(depDATAlist)
       DATAlist.push({
-         "STATUS":"OK",
-        "PO":find[i]['PO'],
-        "CP":find[i]['CP'],
-        "CUSTNAME":find[i]['CUSTNAME'],
-        "CUSLOTNO":find[i]['CUSLOTNO'],
-        "PART":find[i]['PART'],
-        "PARTNAME":find[i]['PARTNAME'],
-        "MATERIAL":find[i]['MATERIAL'],
-        "QUANTITY":find[i]['QUANTITY'],
-        "dateG":find[i]['dateG'],
-        "FG_CHARG":find[i]['FG_CHARG'],
-        "DATA":depDATAlist
+        "STATUS": "OK",
+        "PO": find[i]['PO'],
+        "CP": find[i]['CP'],
+        "CUSTNAME": find[i]['CUSTNAME'],
+        "CUSLOTNO": find[i]['CUSLOTNO'],
+        "PART": find[i]['PART'],
+        "PARTNAME": find[i]['PARTNAME'],
+        "MATERIAL": find[i]['MATERIAL'],
+        "QUANTITY": find[i]['QUANTITY'],
+        "dateG": find[i]['dateG'],
+        "FG_CHARG": find[i]['FG_CHARG'],
+        "DATA": depDATAlist
       })
     }
-  
-  
-  
+
+
+
 
   }
 
@@ -303,12 +303,12 @@ router.post('/CopyReport', async (req, res) => {
 
       let sapdata = find[0][`DATA`];
       let CUSLOTNOd = ``
-      console.log(input[`new`] );
+      console.log(input[`new`]);
       for (i = 0; i < sapdata.length; i++) {
         if (input[`new`] === sapdata[i][`PO`]) {
-          console.log(input[`new`] );
+          console.log(input[`new`]);
           newdataHEAD = sapdata[i];
-          CUSLOTNOd = CUSLOTNOd+ sapdata[i][`CUSLOTNO`]+`,`
+          CUSLOTNOd = CUSLOTNOd + sapdata[i][`CUSLOTNO`] + `,`
           // break;
         }
       }
@@ -320,9 +320,9 @@ router.post('/CopyReport', async (req, res) => {
           let origianlDB = await mongodb.find(MAIN_DATA, MAIN, { "PO": input[`original`] });
           let NewMATCP = await mongodb.find(PATTERN, PATTERN_01, { "CP": newdataHEAD[`CP`] });
           console.log(newdataHEAD[`CP`]);
-          console.log(NewMATCP.length );
-          
-          console.log(origianlDB.length );
+          console.log(NewMATCP.length);
+
+          console.log(origianlDB.length);
           if (NewMATCP.length > 0 && origianlDB.length > 0) {
             let NewMATCPdata = NewMATCP[0];
             let origianlDBdata = origianlDB[0];

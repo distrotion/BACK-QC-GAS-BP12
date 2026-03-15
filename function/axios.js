@@ -1,37 +1,23 @@
 const axios = require('axios')
 
-exports.post =  async (url,body) => {
-    
-    await axios.post( url, body).then(async res => {
-    // console.log(`statusCode: ${res.status}`)
-    // console.log(res)
-    // console.log(res.data);
-    output =  res.data  
-  })
-  .catch(async error => {
-    console.error(error.response.status)
-    output = await error.response.status
-    // outputr = `err`
-  })
-
-  return output;
-     
+exports.post = async (url, body) => {
+  try {
+    const res = await axios.post(url, body);
+    return res.data;
+  } catch (error) {
+    const status = error.response ? error.response.status : 'network_error';
+    console.error(status);
+    return status;
+  }
 };
 
-exports.get =  async (url) => {
-    
-    await axios.get(url).then(async res => {
-    // console.log(`statusCode: ${res.status}`)
-    // console.log(res)
-    // console.log(res.data);
-    output =  res.data  
-  })
-  .catch(async error => {
-    console.error(error.response.status)
-    output = await error.response.status
-    // outputr = `err`
-  })
-
-  return output;
-     
+exports.get = async (url) => {
+  try {
+    const res = await axios.get(url);
+    return res.data;
+  } catch (error) {
+    const status = error.response ? error.response.status : 'network_error';
+    console.error(status);
+    return status;
+  }
 };
