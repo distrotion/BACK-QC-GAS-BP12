@@ -831,10 +831,10 @@ router.post('/GASHMV003-feedback', async (req, res) => {
                   // if (inputSP['INTERSEC'] !== '') {
                   //   core = parseFloat(inputSP['INTERSEC'])
                   // } else {
-                  core = parseFloat(axis_data[axis_data.length]['y']) + parseFloat(inputSP['INTERSEC'])
+                  core = parseFloat(inputSP['INTERSEC'])
                   // }
 
-                  console.log(parseFloat(axis_data[axis_data.length]['y']) + parseFloat(inputSP['INTERSEC']));
+                  console.log(parseFloat(inputSP['INTERSEC']));
                   //-----------------core
                   let RawPoint = [];
                   console.log(LISTbuffer);
